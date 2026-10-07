@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UPSA Campus Store — Shop Smarter, Live Better</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,800;1,9..144,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- LOGIN SCREEN -->
+  <div id="login-screen" class="login-overlay">
+    <div class="login-card">
+      <div class="login-logo">
+        <div class="logo-badge">U</div>
+        <div class="logo-text">UPSA <em>Campus</em></div>
+      </div>
+      <h2>Welcome Back</h2>
+      <p>Please log in to your student account to continue shopping.</p>
+      <div class="login-form">
+        <div id="login-error" class="login-error">Invalid credentials. Please try again.</div>
+        <label for="student-id">Student ID / Email</label>
+        <input type="text" id="student-id" placeholder="e.g. 10234567" required>
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="••••••••" required>
+        <button id="login-btn" class="btn btn--primary btn--full">Log In</button>
+      </div>
+      <p style="margin-top: 1.5rem; font-size: 0.8rem;">Don't have an account? <a href="#" style="color: var(--gold); font-weight: 700;">Sign Up</a></p>
+    </div>
+  </div>
+
+  <!-- APP CONTENT (hidden until login) -->
+  <div id="app-content" class="hidden">
+    <!-- NAVBAR -->
+    <nav class="navbar">
+      <div class="container navbar__inner">
+        <a href="#" class="navbar__logo" onclick="showPage('home')">
+          <div class="logo-badge">U</div>
+          <div class="logo-text">UPSA <em>Campus</em></div>
+        </a>
+        <div class="navbar__links">
+          <a href="#" class="nav-link active" data-page="home" onclick="showPage('home')">Home</a>
+          <a href="#" class="nav-link" data-page="shop" onclick="showPage('shop')">Shop</a>
+          <a href="#" class="nav-link" data-page="history" onclick="showPage('history')">My History</a>
+        </div>
+        <div class="navbar__actions">
+          <button class="cart-btn" onclick="showPage('cart')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+            <span id="cart-count" class="cart-count">0</span>
+          </button>
+          <button class="hamburger" onclick="toggleMobileMenu()">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+      <div id="mobile-menu" class="mobile-menu">
+        <a href="#" class="mobile-link" onclick="showPage('home')">Home</a>
+        <a href="#" class="mobile-link" onclick="showPage('shop')">Shop</a>
+        <a href="#" class="mobile-link" onclick="showPage('history')">My History</a>
+      </div>
+    </nav>
+
+    <!-- TOAST -->
+    <div id="toast" class="toast">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      <span id="toast-msg">Item added to cart</span>
+    </div>
+
+    <!-- HOME PAGE -->
+    <main id="page-home" class="section-page">
+      <section class="hero">
+        <div class="container hero__inner">
+          <div class="hero__text">
+            <span class="pill">Official Campus Store</span>
+            <h1 class="hero__headline">Shop <em>Smarter</em>,<br>Live Better.</h1>
+            <p class="hero__sub">The official e-commerce platform for UPSA students. From textbooks to tech, get everything you need for academic success delivered to your hostel.</p>
+            <div class="hero__ctas">
+              <button class="btn btn--primary" onclick="showPage('shop')">Start Shopping</button>
+            </div>
+          </div>
+          <div class="hero__visual">
+            <div class="hero__blob">🎓</div>
+            <div class="hero__badge">
+              <div class="badge-icon">🚚</div>
+              <div>
+                <div class="badge-label">Hostel Delivery</div>
+                <div class="badge-value">Within 24 Hours</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="stats">
+        <div class="container stats__grid">
+          <div class="stat">
+            <div class="stat__icon">✨</div>
+            <div class="stat__label">Premium Quality</div>
+          </div>
+          <div class="stat">
+            <div class="stat__icon">💳</div>
+            <div class="stat__label">Secure Payments</div>
+          </div>
+          <div class="stat">
+            <div class="stat__icon">🔄</div>
+            <div class="stat__label">Easy Returns</div>
+          </div>
+          <div class="stat">
+            <div class="stat__icon">🎧</div>
+            <div class="stat__label">24/7 Support</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="featured">
+        <div class="container">
+          <div class="section-header">
+            <div>
+              <h2>Featured Products</h2>
+              <p>Handpicked essentials for the modern student.</p>
+            </div>
+            <button class="btn btn--ghost" onclick="showPage('shop')">View All Items →</button>
+          </div>
+          <div id="featured-grid" class="products__grid">
+            <!-- Featured items injected here -->
+          </div>
+        </div>
+      </section>
+
+      <section class="promo">
+        <div class="container">
+          <div class="promo__card">
+            <div class="promo__text">
+              <h2>Student Essentials</h2>
+              <p>Get everything you need for academic success. From textbooks to tech, we've got you covered with the best prices on campus.</p>
+              <button class="btn btn--dark" onclick="showPage('shop')">Shop Now</button>
+            </div>
+            <div class="promo__deco">📚</div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- SHOP PAGE -->
+    <main id="page-shop" class="section-page hidden">
+      <div class="container shop__inner">
+        <header class="shop__header">
+          <h1>Campus Marketplace</h1>
+          <p>Browse our extensive collection of student essentials.</p>
+        </header>
+
+        <div class="shop__controls">
+          <div class="search-wrap">
+            <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            <input type="text" id="shop-search" class="search-input" placeholder="Search for books, tech, stationery..." oninput="filterProducts()">
+          </div>
+          <select id="shop-sort" class="sort-select" onchange="filterProducts()">
+            <option value="default">Sort: Recommended</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: High to Low</option>
+            <option value="rating">Top Rated</option>
+          </select>
+        </div>
+
+        <div id="category-chips" class="chips">
+          <button class="chip active" data-cat="all" onclick="setCategory('all')">All Items</button>
+          <button class="chip" data-cat="Textbooks" onclick="setCategory('Textbooks')">Textbooks</button>
+          <button class="chip" data-cat="Electronics" onclick="setCategory('Electronics')">Electronics</button>
+          <button class="chip" data-cat="Hoodies" onclick="setCategory('Hoodies')">Hoodies</button>
+          <button class="chip" data-cat="Tote Bags" onclick="setCategory('Tote Bags')">Tote Bags</button>
+          <button class="chip" data-cat="Water Bottles" onclick="setCategory('Water Bottles')">Water Bottles</button>
+          <button class="chip" data-cat="Stationery" onclick="setCategory('Stationery')">Stationery</button>
+          <button class="chip" data-cat="Laptop Sleeves" onclick="setCategory('Laptop Sleeves')">Laptop Sleeves</button>
+          <button class="chip" data-cat="Graduation Cloaks" onclick="setCategory('Graduation Cloaks')">Graduation Cloaks</button>
+          <button class="chip" data-cat="Backpacks" onclick="setCategory('Backpacks')">Backpacks</button>
+          <button class="chip" data-cat="Shirts" onclick="setCategory('Shirts')">Shirts</button>
+          <button class="chip" data-cat="Mugs" onclick="setCategory('Mugs')">Mugs</button>
+          <button class="chip" data-cat="Hats" onclick="setCategory('Hats')">Hats</button>
+        </div>
+
+        <div id="shop-grid" class="products__grid">
+          <!-- Shop items injected here -->
+        </div>
+
+        <div id="shop-empty" class="empty-state hidden">
+          <div class="empty-state__icon">🔍</div>
+          <h3>No items found</h3>
+          <p>Try adjusting your search or category filters.</p>
+        </div>
+      </div>
+    </main>
+
+    <!-- MY HISTORY PAGE -->
+    <main id="page-history" class="section-page hidden">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">My Purchase History</h2>
+          <p class="section-sub">View and track all your previous orders from the UPSA Campus Store.</p>
+        </div>
+        <div id="history-list" class="history-list">
+          <!-- History items injected by JS -->
+        </div>
+      </div>
+    </main>
+
+    <!-- CART PAGE -->
+    <main id="page-cart" class="section-page hidden">
+      <div class="container cart__inner">
+        <div class="cart__heading">
+          <button class="btn btn--icon" onclick="showPage('shop')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+          </button>
+          <h1>Your Shopping Bag</h1>
+        </div>
+
+        <div id="cart-empty-view" class="cart-empty hidden">
+          <div class="cart-empty__icon">🛒</div>
+          <h2>Your bag is empty</h2>
+          <p>Looks like you haven't added anything to your bag yet. Start exploring our campus store to find what you need.</p>
+          <button class="btn btn--primary" onclick="showPage('shop')">Start Shopping</button>
+        </div>
+
+        <div id="cart-full-view" class="cart__layout">
+          <div id="cart-items-list" class="cart__items">
+            <!-- Cart items injected here -->
+          </div>
+
+          <aside class="cart__summary">
+            <h2>Order Summary</h2>
+            <div class="summary__rows">
+              <div class="summary__row">
+                <span>Subtotal</span>
+                <span id="summary-subtotal">GH₵ 0.00</span>
+              </div>
+              <div class="summary__row">
+                <span>Delivery Fee</span>
+                <span class="tag-free">Free</span>
+              </div>
+              <div class="summary__row">
+                <span>Student Discount (5%)</span>
+                <span id="summary-discount" class="discount-val">- GH₵ 0.00</span>
+              </div>
+              <div class="summary__row summary__total">
+                <span>Total</span>
+                <span id="summary-total">GH₵ 0.00</span>
+              </div>
+            </div>
+
+            <div class="promo-label">Promo Code</div>
+            <div class="promo-row">
+              <input type="text" class="promo-field" placeholder="e.g. UPSA2024">
+              <button class="btn btn--outline btn--sm">Apply</button>
+            </div>
+            <p class="promo-hint">Only one code can be applied per order.</p>
+
+            <button class="btn btn--primary btn--full" onclick="openCheckout()">Proceed to Checkout</button>
+            
+            <div class="secure-note">
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              Secure Checkout
+            </div>
+          </aside>
+        </div>
+      </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer__inner">
+          <div class="footer__brand">
+            <div class="navbar__logo">
+              <div class="logo-badge">U</div>
+              <div class="logo-text">UPSA <em>Campus</em></div>
+            </div>
+            <p>The official student marketplace for University of Professional Studies, Accra. Empowering students with affordable essentials and flexible rentals.</p>
+          </div>
+          <div class="footer__links">
+            <h4>Quick Links</h4>
+            <a href="#" onclick="showPage('shop')">Shop All</a>
+            <a href="#" onclick="showPage('history')">My History</a>
+            <a href="#">Student Support</a>
+          </div>
+          <div class="footer__links">
+            <h4>Account</h4>
+            <a href="#" onclick="showPage('history')">My History</a>
+            <a href="#">Wishlist</a>
+            <a href="#">Profile Settings</a>
+            <a href="#" onclick="logout()">Log Out</a>
+          </div>
+          <div class="footer__contact">
+            <h4>Contact Us</h4>
+            <p>📍 UPSA Campus, Accra</p>
+            <p>📞 +233 24 000 0000</p>
+            <p>✉️ support@upsacampus.edu</p>
+          </div>
+        </div>
+        <div class="footer__bottom">
+          <p>&copy; 2024 UPSA Campus Store. Built for Students, by Students.</p>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- CHECKOUT MODAL -->
+  <div id="checkout-modal" class="modal-overlay hidden">
+    <div class="modal">
+      <div class="modal__header">
+        <div>
+          <div id="modal-title" class="modal__title">Checkout</div>
+          <div id="modal-step-label" class="modal__step">Step 1 of 3: Shipping</div>
+        </div>
+        <button class="modal__close" onclick="closeCheckout()">&times;</button>
+      </div>
+      
+      <div id="modal-body" class="modal__body">
+        <!-- Steps content injected here -->
+      </div>
+
+      <div class="modal__footer">
+        <div class="payment-logos">Visa • Mastercard • MTN MoMo • Telecel Cash</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
